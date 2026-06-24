@@ -14,8 +14,23 @@ declare_id!("D2qZSL5Uuxiqt4fJSjgGDJU6p3ntSCicQBiU1ur2gZz6");
 #[program]
 pub mod ship_or_slash {
     use super::*;
-
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        initialize::handler(ctx)
+    pub fn initialize_config(
+        ctx: Context<InitializeConfig>,
+        treasury: Pubkey,
+        sb_feed: Pubkey,
+        slash_bps: u16,
+    ) -> Result<()> {
+        initialize_config::handler(ctx, treasury, sb_feed, slash_bps)
     }
+
+    pub fn create_bond(
+        ctx: Context<CreateBond>,
+        github_username: String,
+        target: u32,
+        deadline: i64,
+        lamports: u64,
+    ) -> Result<()> {
+        create_bond::handler(ctx, github_username, target, deadline, lamports)
+    }
+
 }
